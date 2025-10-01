@@ -1065,27 +1065,31 @@
 
         // 切换标签
         function showTab(tabName) {
-            // 隐藏所有标签内容
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.add('hidden');
-            });
-            
-            // 移除所有标签的激活状态
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // 显示选中的标签
-            document.getElementById(tabName + 'Tab').classList.remove('hidden');
-            
-            // 激活选中的标签
-            event.target.classList.add('active');
-            
-            // 如果切换到排行榜，更新数据
-            if (tabName === 'ranking') {
-                updateRanking();
-            }
+    // 隐藏所有标签内容
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        tab.classList.add('hidden');
+    });
+
+    // 移除所有标签的激活状态
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    // 显示选中的标签内容
+    document.getElementById(tabName + 'Tab').classList.remove('hidden');
+
+    // 激活当前点击的标签
+    document.querySelectorAll('.nav-tab').forEach(tab => {
+        if (tab.textContent.includes(tabName === 'ranking' ? '战力排行榜' : '球员管理')) {
+            tab.classList.add('active');
         }
+    });
+
+    // 刷新排行榜数据
+    if (tabName === 'ranking') {
+        updateRanking();
+    }
+}
 
         // 计算综合战力
         function calculateOverallRating(player) {
